@@ -1,5 +1,8 @@
 package com.webatrio.test.model;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -56,6 +59,23 @@ public class Person implements Comparable<Person> {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+	
+	public static int calculateAge(LocalDate birthDate, LocalDate currentDate) {
+        if ((birthDate != null) && (currentDate != null)) {
+            return Period.between(birthDate, currentDate).getYears();
+        } else {
+            return 0;
+        }
+    }
+	
+	public boolean toOld() {
+		int ageOfPerson = Person.calculateAge(this.birthday.toInstant()
+			      .atZone(ZoneId.systemDefault())
+			      .toLocalDate(), new Date().toInstant()
+			      .atZone(ZoneId.systemDefault())
+			      .toLocalDate());
+		return (ageOfPerson > 150);
 	}
 	
 	@Override

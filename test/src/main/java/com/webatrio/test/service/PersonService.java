@@ -20,11 +20,13 @@ public class PersonService {
     	personRepository.findAll().forEach(result::add);
     	
     	Collections.sort(result, Person.Comparators.lastName);
+    	// not finish (collection to transform in iterable)
         
         return personRepository.findAll();
     }
 
     public Person savePerson(Person person) {
+    	// not finish (method toOld() created in model)
     	Person savedPerson = personRepository.save(person);
         return savedPerson;
     }
